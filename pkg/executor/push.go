@@ -54,10 +54,18 @@ func CheckPushPermissions(opts *config.KanikoOptions) error {
 	if opts.NoPush {
 		return nil
 	}
+	logrus.Info("Checking push permissions")
 
 	checked := map[string]bool{}
 	for _, destination := range opts.Destinations {
 		destRef, err := name.NewTag(destination, name.WeakValidation)
+		if opts.Insecure {
+			newReg, err := name.NewInsecureRegistry(destRef.RegistryStr(), name.WeakValidation)
+			if err != nil {
+				return errors.Wrap(err, "getting new insecure registry")
+			}
+			destRef.Repository.Registry = newReg
+		}
 		if err != nil {
 			return errors.Wrap(err, "getting tag for destination")
 		}
