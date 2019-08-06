@@ -100,10 +100,12 @@ func GetFSFromImage(root string, img v1.Image) ([]string, error) {
 			base := filepath.Base(path)
 			dir := filepath.Dir(path)
 			if strings.HasPrefix(base, ".wh.") {
-				logrus.Debugf("Whiting out %s", path)
+				// logrus.Infof("Whiting out %s", path)
 				name := strings.TrimPrefix(base, ".wh.")
+				// logrus.Infof("removing files %s",filepath.Join(dir, name))
 				if err := os.RemoveAll(filepath.Join(dir, name)); err != nil {
-					return nil, errors.Wrapf(err, "removing whiteout %s", hdr.Name)
+					// return nil, errors.Wrapf(err, "removing whiteout %s", hdr.Name)
+					logrus.Warningf("Error removing whiteout %s.", hdr.Name)
 				}
 				continue
 			}
