@@ -56,6 +56,6 @@ integration-test:
 .PHONY: images
 images:
 	# docker build -t $(REGISTRY)/executor:latest -f deploy/Dockerfile .
-	docker build -t $(REGISTRY)/executor:debug -t yehiyam/kaniko_executor:v1.0.0 -f deploy/Dockerfile_debug .
-	docker push yehiyam/kaniko_executor:v1.0.0
+	docker build -t $(REGISTRY)/executor:debug -t yehiyam/kaniko_executor:101119 -f deploy/Dockerfile_debug .
+	docker push yehiyam/kaniko_executor:101119
 	# docker build -t $(REGISTRY)/warmer:latest -f deploy/Dockerfile_warmer .

@@ -32,7 +32,7 @@ import (
 	"github.com/GoogleContainerTools/kaniko/pkg/constants"
 	"github.com/docker/docker/builder/dockerignore"
 	"github.com/docker/docker/pkg/fileutils"
-	"github.com/google/go-containerregistry/pkg/v1"
+	v1 "github.com/google/go-containerregistry/pkg/v1"
 	"github.com/pkg/errors"
 	"github.com/sirupsen/logrus"
 )
@@ -105,7 +105,7 @@ func GetFSFromImage(root string, img v1.Image) ([]string, error) {
 				// logrus.Infof("removing files %s",filepath.Join(dir, name))
 				if err := os.RemoveAll(filepath.Join(dir, name)); err != nil {
 					// return nil, errors.Wrapf(err, "removing whiteout %s", hdr.Name)
-					logrus.Warningf("Error removing whiteout %s.", hdr.Name)
+					logrus.Debugf("Error removing whiteout %s.", hdr.Name)
 				}
 				continue
 			}
